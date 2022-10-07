@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.example.sms.controller;
 
-import com.example.demo.entity.Student;
-import com.example.demo.service.StudentService;
+import com.example.sms.entity.Student;
+import com.example.sms.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

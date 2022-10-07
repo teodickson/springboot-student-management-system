@@ -1,8 +1,8 @@
-package com.example.demo.service.impl;
+package com.example.sms.service.impl;
 
-import com.example.demo.entity.Student;
-import com.example.demo.repository.StudentRepository;
-import com.example.demo.service.StudentService;
+import com.example.sms.entity.Student;
+import com.example.sms.repository.StudentRepository;
+import com.example.sms.service.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

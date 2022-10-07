@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.sms.service;
 
-import com.example.demo.entity.Student;
+import com.example.sms.entity.Student;
 
 import java.util.List;
 

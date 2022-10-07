@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.sms.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
