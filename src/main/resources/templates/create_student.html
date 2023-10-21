@@ -65,10 +65,10 @@
                       <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;">
 
                       <div class="box-footer">
-                            <button type="submit" class ="btn btn-primary">
+                            <button type="submit" name="action" value="add" class ="btn btn-primary">
                                 Submit
                             </button>
-                            <button th:href="@{/students}" class = "btn btn-primary" style="float: right;">
+                            <button th:href="@{/students}" name="action" value="goback" class = "btn btn-primary" style="float: right;">
                                 Go Back
                             </button>
                       </div>

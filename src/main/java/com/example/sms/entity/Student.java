@@ -17,7 +17,7 @@ public class Student {
     @Column(name="last_name")
     private String lastName;
 
-    @NotEmpty(message = "Student email cannot be empty !")
+    @NotEmpty(message = "Student email cannot be empty :)")
     @Column(name = "email")
     private String email;
 

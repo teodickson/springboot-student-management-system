@@ -5,10 +5,7 @@ import com.example.sms.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -36,11 +33,16 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public String saveStudent(@Valid @ModelAttribute("student") Student student, BindingResult result) { // Use @ModelAttribute to bind form data to object
-        if(result.hasErrors()) {
-            return "create_student";
+    public String saveStudent(@Valid @ModelAttribute("student") Student student, BindingResult result,@RequestParam String action) { // Use @ModelAttribute to bind form data to object
+        if(action.equals("add")) {
+            if (result.hasErrors()) {
+                return "create_student";
+            }
+
+            System.out.println("Saving student...");
+            studentService.saveStudent(student);
         }
-        studentService.saveStudent(student);
+
         return "redirect:/students";
     }
 
@@ -51,20 +53,26 @@ public class StudentController {
     }
 
     @PostMapping("/students/{id}")
-    public String updateStudent(@PathVariable Long id, @Valid @ModelAttribute("student") Student student, BindingResult result,  Model model) {
+    public String updateStudent(@PathVariable Long id, @Valid @ModelAttribute("student") Student student, BindingResult result,  Model model, @RequestParam String action) {
         // get student from db by id
-        Student existingStudent = studentService.getStudentById(id);
-        existingStudent.setId(id);
-        existingStudent.setFirstName(student.getFirstName());
-        existingStudent.setLastName(student.getLastName());
-        existingStudent.setEmail(student.getEmail());
+        if(action.equals("update")) {
+            if(result.hasErrors()) {
+                return "create_student";
+            }
 
-        if(result.hasErrors()) {
-            return "create_student";
+            Student existingStudent = studentService.getStudentById(id);
+            existingStudent.setId(id);
+            existingStudent.setFirstName(student.getFirstName());
+            existingStudent.setLastName(student.getLastName());
+            existingStudent.setEmail(student.getEmail());
+
+            System.out.println("Updating student...");
+            // save updated object
+            studentService.updateStudent(existingStudent);
+        } else if(action.equals("goback")) {
+            return "redirect:/students";
         }
 
-        // save updated object
-        studentService.updateStudent(existingStudent);
         return "redirect:/students";
     }
 
